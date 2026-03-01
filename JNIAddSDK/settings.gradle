@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "JNIAddSDK"
 include ':app'
+include ':JNIAddSDK'
