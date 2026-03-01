@@ -11,6 +11,31 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+        // 1. 配置NDK
+        ndk {
+            // 指定要编译的CPU架构，按需添加，常用的是armeabi-v7a、arm64-v8a、x86_64
+            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
+        }
+
+        // 2. 配置CMake
+        externalNativeBuild {
+            cmake {
+                // 指定C++标准，这里用C++17（兼容大部分场景）
+                cppFlags "-std=c++17"
+                // 指定要编译的架构（和上面abiFilters对应）
+                abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
+            }
+        }
+    }
+
+    // 3. 指定CMakeLists.txt的路径
+    externalNativeBuild {
+        cmake {
+             path "src/main/cpp/CMakeLists.txt"
+             version "4.1.2" // CMake版本（和你安装的一致即可）
+        }
+
     }
 
     buildTypes {
